@@ -115,7 +115,7 @@ object SparkKernelDeployer extends LogLike with MockitoSugar {
   {
     override protected def createSockets(
       config: Config, actorSystem: ActorSystem, actorLoader: ActorLoader
-    ): (ActorRef, ActorRef, ActorRef, ActorRef) =
+    ): Unit =
     {
       logger.debug("Creating sockets")
 
@@ -171,9 +171,6 @@ object SparkKernelDeployer extends LogLike with MockitoSugar {
         Props(new ActorInterceptor(ioPubProbe, testIOPubActor)),
         name = SocketType.IOPub.toString
       )
-
-      (heartbeatInterceptor, stdinInterceptor, shellInterceptor,
-        ioPubInterceptor)
     }
 
     override protected def createActorLoader(actorSystem: ActorSystem) = {
